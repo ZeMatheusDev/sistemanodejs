@@ -67,4 +67,7 @@ npm install --save mysql2
 apos fazer isso, iremos importar o template handlebars para basicamente poder passar os valores do back para o front e etc...
 npm install --save express-handlebars
 
+o proximo passo é instalar o body-parser para pegar dados enviados no cadastro 
+npm install --save body-parser
+
 

@@ -20,7 +20,6 @@ CREATE TABLE `servico` (
   profissional varchar(50),
   preco varchar(50),
   comissao varchar(50),
-  minutos boolean,
   
   PRIMARY KEY (`id`)
 );
@@ -32,6 +31,9 @@ CREATE TABLE `usuario_servico` (
   id INT AUTO_INCREMENT,
   usuario_id INT,
   servico_id INT,
+  iniciado boolean,
+  minutosAtuais varchar(50),
+  minutosFinais varchar(50),
   PRIMARY KEY (`id`),
 
   -- RELACIONANDO AS TABELAS
@@ -45,4 +47,24 @@ CREATE TABLE `usuario_servico` (
   REFERENCES servico(id)
   ON DELETE cascade
 );
+
+
+e para finalizar o banco, fazer inserts nos serviços e deixar como padrao para que o usuario possa adicionar
+
+insert into servico (nome, profissional, preco, comissao) values ('Criação de um site', 'Matheus', 1000, 200);
+
+insert into servico (nome, profissional, preco, comissao) values ('Auxilio em dietas', 'Pedro', 200, 40);
+
+insert into servico (nome, profissional, preco, comissao) values ('Auxilio em exercicios de academia', 'Gabriel', 300, 60);
+
+insert into servico (nome, profissional, preco, comissao) values ('Limpar casa', 'Isabelle', 150, 30);
+
+
+agora iremos adicionar o sequelize e o mysql2 para utilizar o mysql no node, use esses comandos:
+npm install --save sequelize
+npm install --save mysql2
+
+apos fazer isso, iremos importar o template handlebars para basicamente poder passar os valores do back para o front e etc...
+npm install --save express-handlebars
+
 

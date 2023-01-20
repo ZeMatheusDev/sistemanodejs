@@ -1,5 +1,6 @@
 #tela {
     background-image: url('../img/background.jpg');
+
 }
 
 .cadastro {
@@ -89,4 +90,21 @@
     font-weight: bold;
     font-size: 25px;
     transition: 150ms;
+}
+
+#servicos{
+    display: flex;
+    margin-left: 695px;
+    margin-top: -19.5px;
+    color: white;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    transition: 150ms;
+    transition: 150ms;
+}
+
+#servicos:hover{
+    color: black;
 }

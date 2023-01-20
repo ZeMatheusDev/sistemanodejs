@@ -1,0 +1,17 @@
+<link rel="stylesheet" href="../css/servico.css">
+{{#each servicos}}
+<input type="hidden" value="{{dataValues.id}}">
+<form action="/contratar" method="POST">
+<br> <br>
+<div id="lista">
+<nav class="listagem">
+<li>{{dataValues.nome}}</li>
+Profissional: {{dataValues.profissional}} <br>
+Valor: ${{dataValues.preco}},00
+</nav>
+<br>
+<button class="btn btn-primary contratar">Contratar</button>
+</div>
+<br>
+</form>
+{{/each}}

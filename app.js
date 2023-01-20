@@ -3,6 +3,8 @@ const app = express();
 const handlebars = require ('express-handlebars');
 const bodyParser = require('body-parser')
 const Usuario = require('./models/Usuario')
+const Servico = require('./models/Servico')
+const Usuario_servico = require('./models/Usuario_servico')
 const flash = require('connect-flash')
 var dadosDaConta = []; // variavel que armazenara os dados da conta apos fazer o login
 var logado; // boolean se esta logado
@@ -63,14 +65,46 @@ app.post('/cadastrar', function(req, res){
     });
 })
 
-
+app.post('/contratar', function(req, res){
+    const nome = req.body.nome;
+    const profissional = req.body.profissional;
+    res.render('home', {logado: logado});
+})
 
 app.get('/', function(req, res){
     res.render('home', {dadosDaConta: dadosDaConta})
 })
 
+
+
 app.get('/admin', function(req, res){
     res.render('admin', {dadosDaConta: dadosDaConta})
+})
+
+app.get('/servicos', function(req, res){
+    Usuario_servico.findAll().then(function(usuario_servico){
+        Object.values(usuario_servico).forEach(val =>{
+            if(val['login'] == login){
+                existe = true;
+            }
+        })   
+        if(existe == false){  
+            Usuario.create({
+                login: login,
+                senha: senha,
+                valorTotal: 0,
+                admin: 0
+            }).then(function(){
+                res.render('home', {dadosDaConta: dadosDaConta})
+            }).catch(function(){
+                res.send('Erro ao criar o usuario')
+            })
+        }
+        else{
+            res.render('home', {dadosDaConta: dadosDaConta})
+
+        }
+    });
 })
 
 app.get('/deslogar', function(req, res){

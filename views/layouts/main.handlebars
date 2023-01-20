@@ -9,6 +9,22 @@
     <title>Document</title>
 </head>
 <body id="tela">
+    <div id="header">
+        <div class="links">
+            <nav>
+                <a id="home" href="/">Inicio</a>
+                <a class="link" href="/cadastro">Cadastrar</a>
+                {{#unless dadosDaConta}}
+                    <a id="login" href="/login">Login</a>
+                {{/unless}}
+                {{#if dadosDaConta}}
+                    <a id="login" href="/deslogar">logout</a>
+                {{/if}}
+                {{#ifEquals dadosDaConta.admin 0}}
+                <a href="">oi</a>
+                {{/ifEquals}}
+            </nav>
+        </div>
     {{{body}}}
 </body>
 </html>

@@ -63,10 +63,24 @@ app.post('/cadastrar', function(req, res){
     });
 })
 
-app.post('/contratar', function(req, res){
-    const nome = req.body.nome;
-    const profissional = req.body.profissional;
-    res.render('home', {logado: logado});
+app.post('/contratar', async function(req, res){
+    var valorFinal;
+    Usuario_servico.create({
+        usuario_id: dadosDaConta.id,
+        servico_id: req.body.id,
+        iniciado: null,
+        minutosAtuais: null,
+        minutosFinais: null
+    })
+        value = await Usuario.findOne({where: {id: dadosDaConta.id}}).then(function(data){
+            const usuarioSelecionado = data.dataValues;
+            valorInicial = parseInt(usuarioSelecionado.valorTotal)+ parseInt(req.body.preco);
+            valorFinal = valorInicial;
+        })
+    console.log(valorFinal);
+    Usuario.update({valorTotal: valorFinal}, {where: {id: dadosDaConta.id}})
+    res.render('home', {dadosDaConta: dadosDaConta})
+
 })
 
 app.get('/', function(req, res){

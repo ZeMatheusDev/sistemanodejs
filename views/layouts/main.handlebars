@@ -21,18 +21,16 @@
                     <a id="login" href="/deslogar">logout</a>
                 {{/if}}
             </nav>
-        </div>
-
-    {{{body}}}
             <div id="servicos">
-                {{#if dadosDaConta}}
-                    <a id="servicos" href="/servicos">Servicos</a>
-                {{/if}}
+                <a id="servicos" href="/servicos">Servicos</a>
             </div>
             <div id="admin">
                 {{#ifAdmin dadosDaConta.admin 1}}
                     <a id="admin" href="/admin">Painel Admin</a>
                 {{/ifAdmin}}
             </div>
+        </div>
+
+    {{{body}}}
 </body>
 </html>

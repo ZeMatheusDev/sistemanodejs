@@ -1,19 +1,19 @@
 const db = require('./db')
 
 // modelando a tabela usuario
-const Usuario = db.sequelize.define('servico',{
-    login:{
+const Servico = db.sequelize.define('servico',{
+    nome:{
         type: db.Sequelize.STRING
     },
-    senha:{
+    profissional:{
         type: db.Sequelize.STRING
     },
-    valorTotal:{
+    preco:{
         type: db.Sequelize.STRING
     },
-    admin:{
-        type: db.Sequelize.BOOLEAN
+    comissao:{
+        type: db.Sequelize.STRING
     },
-}, {tableName: 'usuario'})
+}, {tableName: 'servico'})
 
-module.exports = Usuario
+module.exports = Servico

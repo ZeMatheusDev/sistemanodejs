@@ -7,10 +7,19 @@ const flash = require('connect-flash')
 var dadosDaConta = []; // variavel que armazenara os dados da conta apos fazer o login
 var logado; // boolean se esta logado
 
+
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public
 
 //definindo o template principal do handlebars
-app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
+app.engine('handlebars', handlebars.engine({defaultLayout: 'main', helpers:{
+    ifAdmin: function(a, b, opts){
+        if (a == b) {
+            return opts.fn(this);
+        } else {
+            return opts.inverse(this);
+        } 
+    }
+}}));
 app.set('view engine', 'handlebars')
 //final do handlebars
 
@@ -58,6 +67,10 @@ app.post('/cadastrar', function(req, res){
 
 app.get('/', function(req, res){
     res.render('home', {dadosDaConta: dadosDaConta})
+})
+
+app.get('/admin', function(req, res){
+    res.render('admin', {dadosDaConta: dadosDaConta})
 })
 
 app.get('/deslogar', function(req, res){

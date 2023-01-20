@@ -20,11 +20,14 @@
                 {{#if dadosDaConta}}
                     <a id="login" href="/deslogar">logout</a>
                 {{/if}}
-                {{#ifEquals dadosDaConta.admin 0}}
-                <a href="">oi</a>
-                {{/ifEquals}}
             </nav>
         </div>
+
     {{{body}}}
+            <div id="admin">
+                {{#ifAdmin dadosDaConta.admin 1}}
+                    <a id="admin" href="/admin">Painel Admin</a>
+                {{/ifAdmin}}
+            </div>
 </body>
 </html>

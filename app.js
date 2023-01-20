@@ -7,8 +7,6 @@ const Servico = require('./models/Servico')
 const Usuario_servico = require('./models/Usuario_servico')
 const flash = require('connect-flash')
 var dadosDaConta = []; // variavel que armazenara os dados da conta apos fazer o login
-var logado; // boolean se esta logado
-
 
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public
 
@@ -82,28 +80,8 @@ app.get('/admin', function(req, res){
 })
 
 app.get('/servicos', function(req, res){
-    Usuario_servico.findAll().then(function(usuario_servico){
-        Object.values(usuario_servico).forEach(val =>{
-            if(val['login'] == login){
-                existe = true;
-            }
-        })   
-        if(existe == false){  
-            Usuario.create({
-                login: login,
-                senha: senha,
-                valorTotal: 0,
-                admin: 0
-            }).then(function(){
-                res.render('home', {dadosDaConta: dadosDaConta})
-            }).catch(function(){
-                res.send('Erro ao criar o usuario')
-            })
-        }
-        else{
-            res.render('home', {dadosDaConta: dadosDaConta})
-
-        }
+    Servico.findAll().then(function(servicos){
+        res.render('servico', {servicos:servicos})
     });
 })
 
@@ -119,11 +97,10 @@ app.post('/logar', function(req, res){
         Object.values(dados).forEach(val => {
             if(val['login'] == login){
                 dadosDaConta = val.dataValues;
-                logado = true;
             }
         })
     });
-    res.render('home', {logado: logado});
+    res.redirect('./');
 })
 
 app.get('/login', function(req, res){

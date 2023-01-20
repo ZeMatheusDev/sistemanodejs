@@ -13,7 +13,6 @@ app.use(session({
     resave: true,
     saveUninitialized: true,
     secure:false,
-    cookie: {nome: 'matheus'}
 }))
 
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public

@@ -8,10 +8,10 @@
     <title>Document</title>
 </head>
 <body>
-{{#if dadosDaConta}}
-    <div id="home">
-        Olá, {{{dadosDaConta.login}}}
-    </div>
-{{/if}}
+    {{#if dadosDaConta}}
+        <div id="home">
+            Olá, {{{dadosDaConta.login}}}, Total: ${{{dadosDaConta.valorTotal}}},00
+        </div>
+    {{/if}}
 </body>
 </html>

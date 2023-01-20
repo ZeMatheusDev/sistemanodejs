@@ -36,6 +36,7 @@ app.use(bodyParser.json())
 
 //definindo rotas
 app.get('/cadastro', function(req, res){
+    console.log(dadosDaConta);
     res.render('cadastro', {dadosDaConta: dadosDaConta})
 })
 
@@ -130,6 +131,7 @@ app.post('/contratar', async function(req, res){
             valorFinal = valorInicial;
         })
     Usuario.update({valorTotal: valorFinal}, {where: {id: dadosDaConta.id}})
+    dadosDaConta.valorTotal = valorFinal;
     res.render('home', {dadosDaConta: dadosDaConta})
 
 })

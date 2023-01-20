@@ -1,5 +1,11 @@
 
 <link rel="stylesheet" href="../css/login.css">
+<link rel="stylesheet" href="../css/home.css">
+    {{#if dadosDaConta}}
+    <div id="home">
+    Olá, {{{dadosDaConta.login}}}
+    </div>
+   {{/if}}
 <div id="titulo">
        <h2>Cadastro</h2> 
 </div>

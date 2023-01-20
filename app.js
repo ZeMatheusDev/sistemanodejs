@@ -3,33 +3,25 @@ const app = express();
 const handlebars = require ('express-handlebars');
 const bodyParser = require('body-parser')
 const Usuario = require('./models/Usuario')
-const session = require('express-session')
 const flash = require('connect-flash')
-var sessao =[];
-
-//sessão
-app.use(session({
-    secret: 'hidhudwhqdhubbcx2',
-    resave: true,
-    saveUninitialized: true,
-    secure:false,
-}))
+var dadosDaConta = []; // variavel que armazenara os dados da conta apos fazer o login
+var logado; // boolean se esta logado
 
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public
 
 //definindo o template principal do handlebars
 app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars')
+//final do handlebars
 
 //body-parser
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
-
+//final do body-parser
 
 //definindo rotas
 app.get('/cadastro', function(req, res){
-    console.log(sessao);
-    res.render(`cadastro`);
+    res.render('cadastro', {dadosDaConta: dadosDaConta})
 })
 
 //cadastro de usuario verificando se existe o login enviado
@@ -50,13 +42,14 @@ app.post('/cadastrar', function(req, res){
                 valorTotal: 0,
                 admin: 0
             }).then(function(){
-                res.redirect('./login');
+                res.render('home', {dadosDaConta: dadosDaConta})
             }).catch(function(){
                 res.send('Erro ao criar o usuario')
             })
         }
         else{
-            res.redirect('./');
+            res.render('home', {dadosDaConta: dadosDaConta})
+
         }
     });
 })
@@ -64,8 +57,12 @@ app.post('/cadastrar', function(req, res){
 
 
 app.get('/', function(req, res){
-    console.log(sessao);
-    res.render('home', {sessao: sessao})
+    res.render('home', {dadosDaConta: dadosDaConta})
+})
+
+app.get('/deslogar', function(req, res){
+    dadosDaConta = [];
+    res.render('home', {dadosDaConta: dadosDaConta})
 })
 
 app.post('/logar', function(req, res){
@@ -74,11 +71,12 @@ app.post('/logar', function(req, res){
     Usuario.findAll().then(function(dados){
         Object.values(dados).forEach(val => {
             if(val['login'] == login){
-                sessao = val.dataValues;
+                dadosDaConta = val.dataValues;
+                logado = true;
             }
         })
     });
-    res.redirect('./cadastro');
+    res.render('home', {logado: logado});
 })
 
 app.get('/login', function(req, res){
@@ -92,7 +90,7 @@ app.get('/deletar/:id', function(req, res){
         res.send('erro' + erro)
     })
 })
-
+// final de rotas
 
 app.listen(80, function(){
     console.log('Servidor funcionando...')

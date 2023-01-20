@@ -69,6 +69,3 @@ npm install --save express-handlebars
 
 o proximo passo é instalar o body-parser para pegar dados enviados no cadastro 
 npm install --save body-parser
-
-logo após instalamos o express-session para iniciar sessoes no login
-npm install --save express-session

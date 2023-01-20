@@ -1,0 +1,15 @@
+#tela {
+    background-image: url('../img/background.jpg');
+}
+
+
+.listagem {
+    margin-left: 50px;
+    color: white;
+    font-size: 25px;
+    height: 600px;
+    width: 1800px;
+    background-color: rgba(0, 0, 0, 0.7);
+    margin-top: 80px;
+    text-align: center;
+}

@@ -1,5 +1,66 @@
-{{#if dadosDaConta}}
-    <div id="home">
-        Olá, {{{dadosDaConta.login}}}
-    </div>
-{{/if}}
+<link rel="stylesheet" href="../css/home.css">
+<link rel="stylesheet" href="../css/admin.css">
+
+
+<nav>
+
+
+{{#each dados}}
+<div class="listagem">
+    <br><br>
+    id da compra: {{dataValues.id}}
+    <br><br>
+    {{#ifService dataValues.servico_id 1}}
+    Criação de um site
+    <br><br>
+    Profissional responsável: Matheus
+    {{/ifService}}
+    {{#ifService dataValues.servico_id 2}}
+    Auxilio em dietas
+    <br> <br>
+    Profissional responsável: Pedro
+    {{/ifService}}
+    {{#ifService dataValues.servico_id 3}}
+    Auxilio em exercicios de academia
+    <br><br>
+    Profissional responsável: Gabriel
+    {{/ifService}}
+    {{#ifService dataValues.servico_id 4}}
+    Limpar casa
+    <br><br>
+    Profissional responsável: Isabelle
+    {{/ifService}}
+    <br>
+    <br>
+    Usuario comprador: {{{dataValues.loginUsuario}}}
+    <br><br>
+    {{#ifService dataValues.iniciado null}}
+        <form action="/iniciar" method="POST">
+        <input hidden name="id" type="text" value="{{dataValues.id}}">
+        <button class="btn btn-success" type="submit">Iniciar</button>
+        </form>
+    {{/ifService}}
+    {{#ifService dataValues.iniciado 1}}
+        <form action="/parar" method="POST">
+        <input hidden name="id" type="text" value="{{dataValues.id}}">
+        <button class="btn btn-danger" type="submit">Parar</button>
+        </form>
+    {{/ifService}}
+    <br>
+    {{#ifService dataValues.minutosFinais null}}
+        {{#ifService dataValues.iniciado null}}
+            Nunca iniciado...
+        {{/ifService}}
+    {{/ifService}}
+    {{#if dataValues.minutosFinais}}
+        Duração total: {{dataValues.minutosFinais}}
+    {{/if}}
+    <br>
+    <br>
+    {{#if dataValues.comissao}}
+        Comissão: {{dataValues.comissao}}
+    {{/if}}
+</div>
+{{/each}}
+</div>
+</nav>

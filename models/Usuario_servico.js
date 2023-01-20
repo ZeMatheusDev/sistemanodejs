@@ -17,6 +17,12 @@ const Usuario_servico = db.sequelize.define('usuario_servico',{
     minutosFinais:{
         type: db.Sequelize.STRING
     },
+    loginUsuario:{
+        type: db.Sequelize.STRING
+    },
+    comissao:{
+        type: db.Sequelize.STRING
+    },
 }, {tableName: 'usuario_servico'})
 
 module.exports = Usuario_servico

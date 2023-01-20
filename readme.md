@@ -34,6 +34,8 @@ CREATE TABLE `usuario_servico` (
   iniciado boolean,
   minutosAtuais varchar(50),
   minutosFinais varchar(50),
+  loginUsuario varchar(50),
+  comissao varchar(50),
   PRIMARY KEY (`id`),
 
   -- RELACIONANDO AS TABELAS

@@ -1,23 +1,21 @@
-
 <link rel="stylesheet" href="../css/login.css">
 <link rel="stylesheet" href="../css/home.css">
-    {{#if dadosDaConta}}
+{{#if dadosDaConta}}
     <div id="home">
-    Olá, {{{dadosDaConta.login}}}
+        Olá, {{{dadosDaConta.login}}}
     </div>
-   {{/if}}
+{{/if}}
 <div id="titulo">
-       <h2>Cadastro</h2> 
+    <h2>Cadastro</h2> 
 </div>
 
-
 <div class="cadastro">
-<form action="/cadastrar" method="POST">
-    <input type="text" id="login" name="login" placeholder="Digite seu login...">
-    <br>
-    <br>
-    <input type="text" id="senha" name="senha" placeholder="Digite sua senha...">
-<br><br>
-    <button class="btn btn-primary" type="submit">Cadastrar</button>
-</form>
+    <form action="/cadastrar" method="POST">
+        <input type="text" id="login" name="login" placeholder="Digite seu login...">
+        <br>
+        <br>
+        <input type="text" id="senha" name="senha" placeholder="Digite sua senha...">
+    <br><br>
+        <button class="btn btn-primary" type="submit">Cadastrar</button>
+    </form>
 </div>

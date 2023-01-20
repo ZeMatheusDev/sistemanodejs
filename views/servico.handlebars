@@ -1,24 +1,24 @@
 <link rel="stylesheet" href="../css/servico.css">
 <link rel="stylesheet" href="../css/home.css">
-    {{#if dadosDaConta}}
+{{#if dadosDaConta}}
     <div id="home">
-    Olá, {{{dadosDaConta.login}}}
+        Olá, {{{dadosDaConta.login}}}
     </div>
-   {{/if}}
+{{/if}}
 {{#each servicos}}
 <form action="/contratar" method="POST">
-<input hidden name="id" value="{{dataValues.id}}">
-<input hidden name="preco" value="{{dataValues.preco}}">
-<br> <br>
-<div id="lista">
-<nav class="listagem">
-<li>{{dataValues.nome}}</li>
-Profissional: {{dataValues.profissional}} <br>
-Valor: ${{dataValues.preco}},00
-</nav>
-<br>
-<button class="btn btn-primary contratar">Contratar</button>
-</div>
-<br>
+    <input hidden name="id" value="{{dataValues.id}}">
+    <input hidden name="preco" value="{{dataValues.preco}}">
+    <br> <br>
+    <div id="lista">
+        <nav class="listagem">
+            <li>{{dataValues.nome}}</li>
+            Profissional: {{dataValues.profissional}} <br>
+            Valor: ${{dataValues.preco}},00
+        </nav>
+        <br>
+        <button class="btn btn-primary contratar">Contratar</button>
+    </div>
+    <br>
 </form>
 {{/each}}

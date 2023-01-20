@@ -3,6 +3,18 @@ const app = express();
 const handlebars = require ('express-handlebars');
 const bodyParser = require('body-parser')
 const Usuario = require('./models/Usuario')
+const session = require('express-session')
+const flash = require('connect-flash')
+var sessao =[];
+
+//sessão
+app.use(session({
+    secret: 'hidhudwhqdhubbcx2',
+    resave: true,
+    saveUninitialized: true,
+    secure:false,
+    cookie: {nome: 'matheus'}
+}))
 
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public
 
@@ -17,6 +29,7 @@ app.use(bodyParser.json())
 
 //definindo rotas
 app.get('/cadastro', function(req, res){
+    console.log(sessao);
     res.render(`cadastro`);
 })
 
@@ -52,9 +65,21 @@ app.post('/cadastrar', function(req, res){
 
 
 app.get('/', function(req, res){
+    console.log(sessao);
+    res.render('home', {sessao: sessao})
+})
+
+app.post('/logar', function(req, res){
+    const login = req.body.login;
+    const senha = req.body.senha;
     Usuario.findAll().then(function(dados){
-        res.render('home', {usuarios: dados})
+        Object.values(dados).forEach(val => {
+            if(val['login'] == login){
+                sessao = val.dataValues;
+            }
+        })
     });
+    res.redirect('./cadastro');
 })
 
 app.get('/login', function(req, res){

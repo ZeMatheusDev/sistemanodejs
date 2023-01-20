@@ -1,4 +1,11 @@
 <link rel="stylesheet" href="../css/servico.css">
+<link rel="stylesheet" href="../css/home.css">
+
+    {{#if dadosDaConta}}
+    <div id="home">
+    Olá, {{{dadosDaConta.login}}}
+    </div>
+   {{/if}}
 {{#each servicos}}
 <form action="/contratar" method="POST">
 <input type="hidden" value="{{dataValues.id}}">

@@ -81,7 +81,7 @@ app.get('/admin', function(req, res){
 
 app.get('/servicos', function(req, res){
     Servico.findAll().then(function(servicos){
-        res.render('servico', {servicos:servicos})
+        res.render('servico', {servicos:servicos, dadosDaConta: dadosDaConta})
     });
 })
 

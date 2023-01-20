@@ -71,3 +71,7 @@ npm install --save express-handlebars
 
 o proximo passo é instalar o body-parser para pegar dados enviados no cadastro 
 npm install --save body-parser
+
+e para testes unitarios, instalar o jest e o supertest
+npm install --save-dev jest
+npm install supertest --save-dev

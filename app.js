@@ -36,7 +36,6 @@ app.use(bodyParser.json())
 
 //definindo rotas
 app.get('/cadastro', function(req, res){
-    console.log(dadosDaConta);
     res.render('cadastro', {dadosDaConta: dadosDaConta})
 })
 
@@ -183,6 +182,8 @@ app.get('/deletar/:id', function(req, res){
     })
 })
 // final de rotas
+
+module.exports = app
 
 app.listen(80, function(){
     console.log('Servidor funcionando...')

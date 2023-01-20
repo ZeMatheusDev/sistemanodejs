@@ -5,7 +5,6 @@ const bodyParser = require('body-parser')
 const Usuario = require('./models/Usuario')
 const Servico = require('./models/Servico')
 const Usuario_servico = require('./models/Usuario_servico')
-const flash = require('connect-flash')
 var dadosDaConta = []; // variavel que armazenara os dados da conta apos fazer o login
 
 app.use(express.static(__dirname + '/public')); // salvando o caminho da pasta public

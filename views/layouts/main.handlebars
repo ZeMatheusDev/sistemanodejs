@@ -24,6 +24,11 @@
         </div>
 
     {{{body}}}
+            <div id="servicos">
+                {{#if dadosDaConta}}
+                    <a id="servicos" href="/servicos">Servicos</a>
+                {{/if}}
+            </div>
             <div id="admin">
                 {{#ifAdmin dadosDaConta.admin 1}}
                     <a id="admin" href="/admin">Painel Admin</a>

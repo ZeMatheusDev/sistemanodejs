@@ -17,6 +17,13 @@ app.engine('handlebars', handlebars.engine({defaultLayout: 'main', helpers:{
         } else {
             return opts.inverse(this);
         } 
+    },
+    ifService: function(a, b, opts){
+        if (a == b) {
+            return opts.fn(this);
+        } else {
+            return opts.inverse(this);
+        } 
     }
 }}));
 app.set('view engine', 'handlebars')
@@ -62,6 +69,50 @@ app.post('/cadastrar', function(req, res){
     });
 })
 
+app.post('/iniciar', async function(req, res){
+    var now = Date.now();
+    var date = new Date(now);
+    var horas = date.getHours();
+    var minutes = date.getMinutes();
+    if(minutes < 10){
+        minutes = '0'+minutes;
+    }
+    minutosFinais = horas + ':' + minutes; 
+    Usuario_servico.update({iniciado: 1, minutosAtuais: minutosFinais}, {where: {id: req.body.id}});
+    res.render('home', {dadosDaConta:dadosDaConta})
+})
+
+app.post('/parar', async function(req, res){
+    var horasAtuais;    
+    await Usuario_servico.findOne({where: {id: req.body.id}}).then(function(val){
+        horasAtuais = val.dataValues.minutosAtuais;
+    })
+    separacao = horasAtuais.split(':');
+    minutosDasHoras = parseInt(separacao[0]*60) + parseInt(separacao[1]);
+    var now = Date.now();
+    var date = new Date(now);
+    var horas = date.getHours();
+    var minutes = date.getMinutes();
+    if(minutes < 10){
+        minutes = '0'+minutes;
+    }
+    minutosFinais = horas + ':' + minutes; 
+    separacao = minutosFinais.split(':');
+    minutosDasHorasAtuais = parseInt(separacao[0] * 60) + parseInt(separacao[1]);
+    subtracaoDeMinutos = minutosDasHorasAtuais - minutosDasHoras;
+    transformacaoHoras = parseInt(subtracaoDeMinutos/60);
+    if(transformacaoHoras < 10){
+        transformacaoHoras = '0'+transformacaoHoras;
+    }
+    transformacaoMin = parseInt(subtracaoDeMinutos%60);
+    if(transformacaoMin < 10){
+        transformacaoMin = '0'+transformacaoMin;
+    }
+    transformacaoFinal = transformacaoHoras + ':' + transformacaoMin;
+    Usuario_servico.update({iniciado: 0, minutosAtuais: minutosFinais, minutosFinais: transformacaoFinal}, {where: {id: req.body.id}});
+    res.render('home', {dadosDaConta:dadosDaConta})
+})
+
 app.post('/contratar', async function(req, res){
     var valorFinal;
     Usuario_servico.create({
@@ -69,14 +120,15 @@ app.post('/contratar', async function(req, res){
         servico_id: req.body.id,
         iniciado: null,
         minutosAtuais: null,
-        minutosFinais: null
+        minutosFinais: null,
+        loginUsuario: dadosDaConta.login,
+        comissao: req.body.comissao,
     })
         value = await Usuario.findOne({where: {id: dadosDaConta.id}}).then(function(data){
             const usuarioSelecionado = data.dataValues;
             valorInicial = parseInt(usuarioSelecionado.valorTotal)+ parseInt(req.body.preco);
             valorFinal = valorInicial;
         })
-    console.log(valorFinal);
     Usuario.update({valorTotal: valorFinal}, {where: {id: dadosDaConta.id}})
     res.render('home', {dadosDaConta: dadosDaConta})
 
@@ -86,14 +138,15 @@ app.get('/', function(req, res){
     res.render('home', {dadosDaConta: dadosDaConta})
 })
 
-
-
-app.get('/admin', function(req, res){
-    res.render('admin', {dadosDaConta: dadosDaConta})
+app.get('/admin', async function(req, res){
+    await Usuario_servico.findAll().then(async function(dados){
+        res.render('admin', {dados: dados, dadosDaConta: dadosDaConta})
+    })
 })
 
 app.get('/servicos', function(req, res){
     Servico.findAll().then(function(servicos){
+        console.log(servicos)
         res.render('servico', {servicos:servicos, dadosDaConta: dadosDaConta})
     });
 })

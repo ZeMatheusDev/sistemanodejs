@@ -146,7 +146,6 @@ app.get('/admin', async function(req, res){
 
 app.get('/servicos', function(req, res){
     Servico.findAll().then(function(servicos){
-        console.log(servicos)
         res.render('servico', {servicos:servicos, dadosDaConta: dadosDaConta})
     });
 })

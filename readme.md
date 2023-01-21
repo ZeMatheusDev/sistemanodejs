@@ -12,6 +12,7 @@ CREATE TABLE `usuario` (
   PRIMARY KEY (`id`)
 );
 
+
 logo após, a tabela de serviços...
 
 CREATE TABLE `servico` (

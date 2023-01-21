@@ -5,6 +5,7 @@
         Olá, {{{dadosDaConta.login}}}, Total: ${{{dadosDaConta.valorTotal}}},00
     </div>
 {{/if}}
+
 <div id="titulo">
     <h2>Cadastro</h2> 
 </div>
@@ -12,10 +13,9 @@
 <div class="cadastro">
     <form action="/cadastrar" method="POST">
         <input type="text" id="login" name="login" placeholder="Digite seu login...">
-        <br>
-        <br>
+        <br><br>
         <input type="text" id="senha" name="senha" placeholder="Digite sua senha...">
-    <br><br>
+        <br><br>
         <button class="btn btn-primary" type="submit">Cadastrar</button>
     </form>
 </div>

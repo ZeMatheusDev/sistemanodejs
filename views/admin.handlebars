@@ -1,34 +1,30 @@
 <link rel="stylesheet" href="../css/home.css">
 <link rel="stylesheet" href="../css/admin.css">
-
-
 <nav>
-
-
 {{#each dados}}
 <div class="listagem">
     <br><br>
     id da compra: {{dataValues.id}}
     <br><br>
     {{#ifService dataValues.servico_id 1}}
-    Criação de um site
-    <br><br>
-    Profissional responsável: Matheus
+        Criação de um site
+        <br><br>
+        Profissional responsável: Matheus
     {{/ifService}}
     {{#ifService dataValues.servico_id 2}}
-    Auxilio em dietas
-    <br> <br>
-    Profissional responsável: Pedro
+        Auxilio em dietas
+        <br> <br>
+        Profissional responsável: Pedro
     {{/ifService}}
     {{#ifService dataValues.servico_id 3}}
-    Auxilio em exercicios de academia
-    <br><br>
-    Profissional responsável: Gabriel
+        Auxilio em exercicios de academia
+        <br><br>
+        Profissional responsável: Gabriel
     {{/ifService}}
     {{#ifService dataValues.servico_id 4}}
-    Limpar casa
-    <br><br>
-    Profissional responsável: Isabelle
+        Limpar casa
+        <br><br>
+        Profissional responsável: Isabelle
     {{/ifService}}
     <br>
     <br>

@@ -39,7 +39,6 @@ app.get('/cadastro', function(req, res){
     res.render('cadastro', {dadosDaConta: dadosDaConta})
 })
 
-//cadastro de usuario verificando se existe o login enviado
 app.post('/cadastrar', function(req, res){
     const login = req.body.login;
     const senha = req.body.senha;
@@ -157,17 +156,17 @@ app.get('/deslogar', function(req, res){
     res.render('home', {dadosDaConta: dadosDaConta})
 })
 
-app.post('/logar', function(req, res){
+app.post('/logar', async function(req, res){
     const login = req.body.login;
     const senha = req.body.senha;
-    Usuario.findAll().then(function(dados){
-        Object.values(dados).forEach(val => {
+    await Usuario.findAll().then(async function(dados){
+        Object.values(dados).forEach(async val => {
             if(val['login'] == login){
                 dadosDaConta = val.dataValues;
             }
         })
     });
-    res.redirect('./');
+    res.redirect('./')
 })
 
 app.get('/login', function(req, res){
